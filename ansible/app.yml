@@ -2,6 +2,7 @@
 - hosts: app_cluster
   roles:
     - { role: iptables, tags: [ 'firewall' ] }
+    - { role: ssh, tags: [ 'ssh' ] }
 
 - hosts: galera_cluster
   roles:
@@ -13,6 +14,7 @@
 
 - hosts: frontend_server
   roles:
+    - { role: ssh, tags: [ 'ssh' ] }
     - { role: docker_installation, tags: [ 'pre' ] }
     - { role: haproxy, tags: [ 'front' ] }
 

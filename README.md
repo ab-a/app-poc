@@ -40,7 +40,10 @@ ansible-playbook -i hosts app.yml --tags database # only deploy the Galera Clust
 Simply add the server in the `hosts` file. Ideally name it `node-00X` incrementaly; this allows you to modify the `hosts` file only once. Exemple if you have 3 servers for the app and 3 dedicated servers for the database :
 ```bash
 [app_cluster]
-node-[001:010]
+node-[001:03]
+
+[galera_cluster]
+node-[010:013]
 ```
 If you want to change the database server or add some node (`galera_cluster` host group) you need to destroy the cluster before recreate it.
 After that all you have to do is to run again the ansible playbook : 

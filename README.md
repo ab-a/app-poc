@@ -20,9 +20,7 @@ Automated deployment of a small web application easily scalable and high availab
 - subnet server `ansible/roles/iptables/tasks/main.yml` line 27
 - frontend server in `ansible/roles/iptables/tasks/main.yml` line 35 and line 44
 
-You can replace some easily with `sed` : 
-- `$FRONTEND_IP` refers to your frontend ip (without CIDR) 
-- `$SUBNET` refers to the subnet on which your machines communicate with each other (with CIDR)
+You can replace some easily with `sed` (`$FRONTEND_IP` and `$SUBNET` variables).
 #### Hostname resolution
 You need that all your servers are accessible from the name configured on the host file, so don't forget to edit your `/etc/hosts`, if necessary and check if you can ping all of your hosts (`ansible all -m ping -i hosts`)
 # Deployment
@@ -37,7 +35,7 @@ ansible-playbook -i hosts app.yml --skip-tags pre # skip docker installation
 ansible-playbook -i hosts app.yml --tags database # only deploy the Galera Cluster
 ```
 # Scale app and database
-Simply add the server in the `hosts` file. Ideally name it `node-00X` incrementaly; this allows you to modify the `hosts` file only once. Exemple if you have 3 servers for the app and 3 servers for the database :
+Simply add the server in the `hosts` file. Ideally name it `node-00X` incrementaly; this allows you to modify the `hosts` file only once. Exemple if you have 3 servers for the app and 3 dedicated servers for the database :
 ```bash
 [app_cluster]
 node-[001:010]
@@ -48,12 +46,6 @@ node-[010:013]
 And all you have to do is to run again the ansible playbook : 
 ```bash
 ansible-playbook -i hosts app.yml
-```
-# Dedicated database node
-I use the same nodes for the application and the Galera cluster but if you want to use dedicated node for Galera cluster, simply edit the `hosts` file and specify the servers in `galera_cluster` group :
-```
-[galera_cluster]
-node-[010:013]
 ```
 # Note
 - The build of the container has a problem when adding the git package, caused by a dns issue for me, fixed by set docker dns in `/etc/docker/daemon.json`

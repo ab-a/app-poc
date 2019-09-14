@@ -42,8 +42,8 @@ Simply add the server in the `hosts` file. Ideally name it `node-00X` incrementa
 [app_cluster]
 node-[001:010]
 ```
-If you want to change the database server or add some node actually you need to destroy the cluster and recreate it.
-And all you have to do is to run again the ansible playbook : 
+If you want to change the database server or add some node actually you need to destroy the cluster before recreate it.
+After that all you have to do is to run again the ansible playbook : 
 ```bash
 ansible-playbook -i hosts app.yml
 ```

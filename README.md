@@ -41,10 +41,8 @@ Simply add the server in the `hosts` file. Ideally name it `node-00X` incrementa
 ```bash
 [app_cluster]
 node-[001:010]
-
-[galera_cluster]
-node-[010:013]
 ```
+If you want to change the database server or add some node actually you need to destroy the cluster and recreate it.
 And all you have to do is to run again the ansible playbook : 
 ```bash
 ansible-playbook -i hosts app.yml

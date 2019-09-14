@@ -1,0 +1,86 @@
+---
+- name: Stop and disable firewalld.
+  service:
+    name: firewalld
+    state: stopped
+    enabled: False
+
+- name: Allow loopback
+  iptables:
+    chain: INPUT
+    in_interface: lo
+    jump: ACCEPT
+    action: insert
+    rule_num: 1
+
+- name: Add ping iptables rules
+  iptables:
+    chain: INPUT
+    protocol: icmp
+    jump: ACCEPT
+    action: insert
+
+- name: Add mySQL Cluster iptables rules
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    source: $SUBNET
+    destination_port: "3306"
+    jump: ACCEPT
+    action: insert
+
+- name: Add mySQL Cluster iptables rules
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    source: $SUBNET
+    destination_port: "4444"
+    jump: ACCEPT
+    action: insert
+
+- name: Add mySQL Cluster iptables rules
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    source: $SUBNET
+    destination_port: "4567"
+    jump: ACCEPT
+    action: insert
+
+- name: Add mySQL Cluster iptables rules
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    source: $SUBNET
+    destination_port: "4568"
+    jump: ACCEPT
+    action: insert
+
+- name: Add application related iptables rules
+  iptables:
+    chain: INPUT
+    source: $FRONTEND_IP/32
+    protocol: tcp
+    destination_port: "8080"
+    jump: ACCEPT
+    action: insert
+
+- name: Restrict ssh access
+  iptables:
+    chain: INPUT
+    source: $FRONTEND_IP/32
+    protocol: tcp
+    destination_port: "22"
+    jump: ACCEPT
+    action: insert
+
+- name: Allow related and established connections
+  iptables:
+    chain: INPUT
+    ctstate: ESTABLISHED,RELATED
+    jump: ACCEPT
+
+- name: Set the policy for the INPUT chain to DROP
+  iptables:
+    chain: INPUT
+    policy: DROP

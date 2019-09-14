@@ -1,0 +1,17 @@
+---
+- name: Setup the database for the app (this is dirty but dont take care)
+  shell: |
+      mysql -uroot -e "DROP DATABASE IF EXISTS app_db; CREATE DATABASE app_db; 
+      USE app_db; DROP TABLE IF EXISTS \`app_table\`;
+      DROP TABLE IF EXISTS \`app_table\`;
+      CREATE TABLE \`app_table\` (
+      \`id\` int(6) unsigned NOT NULL AUTO_INCREMENT,
+      \`name\` varchar(30) NOT NULL,
+      \`color\` varchar(30) NOT NULL,
+      \`pet\` varchar(30) NOT NULL,
+      UNIQUE KEY unique_name (name),
+      PRIMARY KEY (\`id\`)
+      ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;"
+  args:
+    executable: /bin/bash
+  register: stdout

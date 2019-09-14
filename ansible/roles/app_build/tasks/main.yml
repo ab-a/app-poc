@@ -1,0 +1,30 @@
+---
+- name: Create directory
+  file:
+    path: /opt/app/
+    state: directory
+
+- name: Copy Source to the remote server
+  copy:
+    src: ~/tech-test/application
+    dest: /opt/app
+
+- name: Inject hostname in each application
+  lineinfile:
+    path: /opt/app/application/form/Header.tmpl
+    regexp: '^(.*)You are on the backend(.*)$'
+    line: '        <h1>You are on the backend {{ inventory_hostname }}</h1>'
+
+- name: Build Docker image
+  docker_image:
+    name: app
+    path: /opt/app/application
+    source: build
+    state: present
+
+- name: Run the container
+  docker_container:
+    name: app
+    image: app:latest
+    network_mode: host
+    state: started

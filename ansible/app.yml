@@ -1,0 +1,26 @@
+---
+- hosts: app_cluster
+  roles:
+    - { role: iptables, tags: [ 'firewall' ] }
+
+- hosts: galera_cluster
+  roles:
+    - { role: galera_repos, tags: [ 'database', 'setup', 'packages' ] }
+    - { role: galera_packages, tags: [ 'database', 'setup', 'packages' ] }
+    - { role: galera_privs, tags: [ 'database', 'auth' ] }
+    - { role: galera_conf, tags: [ 'database', 'config' ] }
+    - { role: galera_bootstrap, tags: [ 'database', 'bootstrap' ] }
+
+- hosts: frontend_server
+  roles:
+    - { role: docker_installation, tags: [ 'pre' ] }
+    - { role: haproxy, tags: [ 'front' ] }
+
+- hosts: db_bootstrap
+  roles:
+    - { role: db_app_bootstrap, tags: ['db_app_bootstrap' ] }
+
+- hosts: app_cluster
+  roles:
+    - { role: docker_installation, tags: [ 'pre' ] }
+    - { role: app_build, tags: [ 'app' ] }

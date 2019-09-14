@@ -1,0 +1,28 @@
+---
+- name: Create directory
+  file:
+    path: /opt/app/misc/ssl
+    state: directory
+
+- name: Copy haproxy config file
+  copy:
+    src: ~/tech-test/misc/haproxy.cfg
+    dest: /opt/app/misc/
+
+- name: Copy haproxy SSL cert
+  copy:
+    src: ~/tech-test/misc/ssl/ssl.pem
+    dest: /opt/app/misc/ssl/ssl.pem
+
+- name: Run haproxy container
+  docker_container:
+    name: 'haproxy'
+    recreate: true
+    restart_policy: unless-stopped
+    image: 'haproxy:latest'
+    published_ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/opt/app/misc/ssl:/etc/ssl"
+      - "/opt/app/misc/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg"

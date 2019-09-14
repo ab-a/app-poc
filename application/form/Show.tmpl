@@ -1,0 +1,9 @@
+{{ define "Show" }}
+  {{ template "Header" }}
+    {{ template "Menu"  }}
+    <h2> Register {{ .ID }} </h2>
+      <p>Name: {{ .Name }}</p>
+      <p>Color:  {{ .Color }}</p>
+      <p>Pet:  {{ .Pet }}</p><br /> <a href="/edit?id={{ .Id }}">Edit</a></p>
+  {{ template "Footer" }}
+{{ end }}

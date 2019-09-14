@@ -1,0 +1,15 @@
+{{ define "New" }}
+  {{ template "Header" }}
+    {{ template "Menu" }} 
+   <h2>New user</h2>  
+    <form method="POST" action="insert">
+      <label> Name </label><input type="text" name="name" /><br />
+      <label> Color </label><input type="text" name="color" /><br />
+      <label> Pet </label>      <label> Pet </label><select name="pet">
+    <option value="dog">Dog</option>
+    <option value="cat">Cat</option>
+  </select><br />
+      <input type="submit" value="Save user" />
+    </form>
+  {{ template "Footer" }}
+{{ end }}

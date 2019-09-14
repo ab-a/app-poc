@@ -35,7 +35,7 @@ ansible-playbook -i hosts app.yml --tags app # only deploy the app
 ansible-playbook -i hosts app.yml --skip-tags pre # skip docker installation
 ansible-playbook -i hosts app.yml --tags database # only deploy the Galera Cluster
 ```
-⚠️⚠️⚠️ Note : Once the galera cluster is deployed you must use `--skip-tags database` !
+⚠️ Note : Once the galera cluster is deployed you must use `--skip-tags database` !
 # Scale app and database
 Simply add the server in the `hosts` file. Ideally name it `node-00X` incrementaly; this allows you to modify the `hosts` file only once. Exemple if you have 3 servers for the app and 3 dedicated servers for the database :
 ```bash

@@ -26,12 +26,7 @@ You can replace some easily with `sed` :
 #### Hostname resolution
 You need that all your servers are accessible from the name configured on the host file, so don't forget to edit your `/etc/hosts`, if necessary and check if you can ping all of your hosts (`ansible all -m ping -i hosts`)
 # Deployment
-The ansible playbook is divided in three part :
-- the iptables configuration
-- the installation of docker
-- the deployment of the application
-
-Assuming that all your hosts are well configured, you have just to do :
+Simply do :
 ```bash
 ansible-playbook -i hosts app.yml
 ```

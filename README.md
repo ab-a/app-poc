@@ -9,7 +9,7 @@ Automated deployment of a small web application easily scalable and high availab
 - ansible installed on the frontend server
 ### Ansible actions
 - install and configure docker [*frontend and backend*]
-- deploy an haproxy container [*frontend*]
+- configure deploy an haproxy container with https [*frontend*]
 - deploy a strict set of iptables rules [*backend*]
 - configure the ssh to allow only key connections [*frontend and backend*]
 - deploy a mySQL cluster [*backend*]

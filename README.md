@@ -11,6 +11,7 @@ Automated deployment of a small web application easily scalable and high availab
 - install and configure docker [*frontend and backend*]
 - deploy an haproxy container [*frontend*]
 - deploy a strict set of iptables rules [*backend*]
+- configure the ssh to allow only key connections [*frontend and backend*]
 - deploy a mySQL cluster [*backend*]
 - bootstrap the database for the application [*backend*]
 - build and launch the application in a container [*backend*]

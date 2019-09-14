@@ -9,7 +9,7 @@ Automated deployment of a small web application easily scalable and high availab
 - ansible installed on the frontend server
 ### Ansible actions
 - install and configure docker [*frontend and backend*]
-- configure deploy an haproxy container with https [*frontend*]
+- configure and deploy an haproxy container with https [*frontend*]
 - deploy a strict set of iptables rules [*backend*]
 - configure the ssh to allow only key connections [*frontend and backend*]
 - deploy a mySQL cluster [*backend*]
@@ -21,7 +21,7 @@ Automated deployment of a small web application easily scalable and high availab
 - subnet server `ansible/roles/iptables/tasks/main.yml` line 27
 - frontend server in `ansible/roles/iptables/tasks/main.yml` line 35 and line 44
 
-You can replace some easily with `sed` (`$FRONTEND_IP` and `$SUBNET` variables).
+You can easily replace IP with `sed` (`$FRONTEND_IP` and `$SUBNET` variables).
 #### Hostname resolution
 You need that all your servers are accessible from the name configured on the host file, so don't forget to edit your `/etc/hosts`, if necessary and check if you can ping all of your hosts (`ansible all -m ping -i hosts`)
 # Deployment
@@ -51,8 +51,8 @@ After that all you have to do is to run again the ansible playbook :
 ansible-playbook -i hosts app.yml
 ```
 # Note
-- The build of the container has a problem when adding the git package, caused by a dns issue for me, fixed by set docker dns in `/etc/docker/daemon.json`
-- Synchronisation problem between Galera Node fixed by changing the `wsrep_sst_method`.
+- The build of the container has a problem when adding the git package, caused by a dns issue for me, fixed by set docker dns in `/etc/docker/daemon.json` (included in the playbook)
+- Synchronisation problem between Galera Node fixed by changing the `wsrep_sst_method` (included in the playbook)
 - Generate your own `ssl.pem` if you need, the file include here is a generic self signed pem
 - The HAProxy frontend server is the SSL termination. The idea is to make a protocol break wich is great if we assume that our backend servers are really protected and isolated from the outside like on a traditional cloud (vxlan private network for example) to be able to implement a WAF between the front server and the application server for example.
 - Unlike a cloud deployment where each instance has a security group and where rules can be made at this level, we set up filtering at server level here because all our servers are public.

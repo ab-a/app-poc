@@ -11,6 +11,7 @@ Automated deployment of a small web application easily scalable and high availab
 - install and configure docker [*frontend and backend*]
 - deploy an haproxy container [*frontend*]
 - deploy a strict set of iptables rules [*backend*]
+- configure the ssh to allow only key connections [*frontend and backend*]
 - deploy a mySQL cluster [*backend*]
 - bootstrap the database for the application [*backend*]
 - build and launch the application in a container [*backend*]
@@ -34,6 +35,7 @@ ansible-playbook -i hosts app.yml --tags app # only deploy the app
 ansible-playbook -i hosts app.yml --skip-tags pre # skip docker installation
 ansible-playbook -i hosts app.yml --tags database # only deploy the Galera Cluster
 ```
+⚠️⚠️⚠️ Note : Once the galera cluster is deployed you must use `--skip-tags database` !
 # Scale app and database
 Simply add the server in the `hosts` file. Ideally name it `node-00X` incrementaly; this allows you to modify the `hosts` file only once. Exemple if you have 3 servers for the app and 3 dedicated servers for the database :
 ```bash

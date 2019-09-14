@@ -6,7 +6,10 @@
       <input type="hidden" name="uid" value="{{ .ID }}" />
       <label> Name </label><input type="text" name="name" value="{{ .Name }}"  /><br />
       <label> Color </label><input type="text" name="color" value="{{ .Color }}"  /><br />
-      <label> Pet </label><input type="text" name="pet" value="{{ .Pet }}"  /><br />
+      <label> Pet </label>      <label> Pet </label><select name="pet">
+    <option value="dog">Dog</option>
+    <option value="cat">Cat</option>
+  </select><br />
       <input type="submit" value="Save user" />
     </form><br />    
   {{ template "Footer" }}

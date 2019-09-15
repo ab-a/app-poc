@@ -18,8 +18,8 @@ Automated deployment of a small web application easily scalable and high availab
 # Before deploy
 #### You need to replace some IP :
 - backends servers in `haproxy/haproxy.cfg` from the line 23
-- subnet server `ansible/roles/iptables/tasks/main.yml` line 27
-- frontend server in `ansible/roles/iptables/tasks/main.yml` line 35 and line 44
+- subnet server `ansible/roles/iptables/tasks/main.yml` line 27, 36, 45 and 54
+- frontend server in `ansible/roles/iptables/tasks/main.yml` line 62 and 71
 
 You can easily replace IP with `sed` (`$FRONTEND_IP` and `$SUBNET` variables).
 #### Hostname resolution
